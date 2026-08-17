@@ -7,40 +7,52 @@ export default function BackgroundImage() {
   const { currentTheme } = useTheme();
 
   return (
-    <div className="absolute inset-0 z-0">
-      {/* Background artwork */}
+    <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+      {/* Background artwork with responsive focal point */}
       <Image
         src={currentTheme.backgroundImage}
-        alt=""
+        alt="Arijit Singh Cinematic Background Artwork"
         fill
         priority
-        sizes="100vw"
-        className="bg-artwork object-cover"
-        style={{ objectFit: "cover" }}
-        quality={90}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+        className="bg-artwork object-cover max-sm:object-[63%_25%] sm:max-md:object-[58%_32%] md:max-lg:object-[52%_40%] lg:object-center transition-all duration-700 ease-out"
+        quality={92}
       />
-      {/* Subtle vignette — very light so artwork stays vivid */}
+
+      {/* Mobile-only subtle top title banner */}
+      <div className="sm:hidden absolute top-14 inset-x-0 flex flex-col items-center justify-center text-center px-4 z-10 opacity-90">
+        <span
+          className="text-2xl font-bold tracking-tight text-white/90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          ARIJIT SINGH
+        </span>
+        <span
+          className="text-[10px] tracking-[0.25em] uppercase font-semibold text-amber-300/80 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          LOVE, IN EVERY NOTE
+        </span>
+      </div>
+
+      {/* Subtle vignette — soft border darkening */}
       <div
         className="absolute inset-0"
-        style={{ boxShadow: "inset 0 0 120px 40px rgba(0,0,0,0.35)" }}
-        aria-hidden="true"
-      />
-      {/* Bottom gradient — just enough for player bar text legibility */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[25%]"
         style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
+          boxShadow: "inset 0 0 100px 30px rgba(0,0,0,0.45)",
         }}
         aria-hidden="true"
       />
-      {/* Top gradient — subtle for topbar legibility */}
+
+      {/* Bottom gradient — protects player bar and controls */}
       <div
-        className="absolute inset-x-0 top-0 h-[12%]"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 100%)",
-        }}
+        className="absolute inset-x-0 bottom-0 h-72 sm:h-52 bg-linear-to-t from-black/95 via-black/60 to-transparent"
+        aria-hidden="true"
+      />
+
+      {/* Top gradient — protects status bar and navigation */}
+      <div
+        className="absolute inset-x-0 top-0 h-36 sm:h-24 bg-linear-to-b from-black/85 via-black/40 to-transparent"
         aria-hidden="true"
       />
     </div>

@@ -1,7 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import {
+  X,
+  Check,
+  Copy,
+  ExternalLink,
+} from "lucide-react";
 import { faqs } from "@/data/faqs";
 
 export type ModalType = "about" | "faq" | "support" | null;
@@ -14,7 +21,7 @@ interface ModalOverlayProps {
 const modalTitles: Record<string, string> = {
   about: "About This Project",
   faq: "Frequently Asked Questions",
-  support: "Support",
+  support: "Support Creator",
 };
 
 function AboutContent() {
@@ -56,34 +63,130 @@ function FAQContent() {
 }
 
 function SupportContent() {
+  const [copied, setCopied] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+  const upiId = "sonidivyesh2004@okhdfcbank";
+  const upiDeepLink = `upi://pay?pa=${upiId}&pn=Divyesh%20Soni&cu=INR&tn=Support%20Arijit%20Radio`;
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(upiId);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const handleUpiClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    await copyToClipboard();
+
+    // Check if on mobile device
+    const isMobile =
+      typeof navigator !== "undefined" &&
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      window.location.href = upiDeepLink;
+    } else {
+      setNotice("UPI ID copied! Scan QR code on your mobile phone to pay.");
+      setTimeout(() => setNotice(null), 4000);
+    }
+  };
+
   return (
-    <div className="space-y-5 text-white/70 text-sm leading-relaxed">
-      <div className="space-y-2">
-        <h3 className="text-sm font-semibold text-white/90">Report an Issue</h3>
-        <p>
-          If you encounter a bug, broken playback, or anything that doesn&apos;t
-          feel right, please let us know. We read every report.
+    <div className="flex flex-col items-center text-center space-y-6 pb-2">
+      {/* Intro message */}
+      <div className="space-y-1.5 max-w-xs">
+        <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">
+          Fan Tribute & Streaming Fund
+        </p>
+        <h3
+          className="text-lg font-bold text-white tracking-tight"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Keep the Radio Playing
+        </h3>
+        <p className="text-xs text-white/60 leading-relaxed">
+          Your support helps cover hosting and streaming bandwidth for all listeners.
         </p>
       </div>
-      <div className="space-y-2">
-        <h3 className="text-sm font-semibold text-white/90">Contact</h3>
-        <p>
-          For general inquiries, partnership proposals, or just to say hello —
-          reach out and we&apos;ll get back to you.
+
+      {/* QR Code Presentation */}
+      <div className="relative group">
+        <div className="absolute -inset-2 bg-linear-to-b from-amber-500/20 to-transparent rounded-3xl blur-xl opacity-60 pointer-events-none" />
+        <div className="relative bg-white p-3.5 rounded-2xl shadow-2xl shadow-black/50 border border-white/20">
+          <Image
+            src="/images/support-qr.png"
+            alt="Divyesh Soni UPI QR Code"
+            width={240}
+            height={300}
+            className="w-56 sm:w-60 h-auto rounded-xl object-contain block select-none"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* UPI Actions */}
+      <div className="w-full max-w-xs space-y-3">
+        {/* Copy UPI ID Pill */}
+        <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-left hover:border-white/20 transition-colors">
+          <div className="min-w-0 flex-1">
+            <span className="block text-[10px] uppercase font-semibold tracking-wider text-white/40">
+              UPI ID
+            </span>
+            <span className="block text-xs font-mono text-amber-300 truncate select-all">
+              {upiId}
+            </span>
+          </div>
+          <button
+            onClick={copyToClipboard}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              copied
+                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                : "bg-white/10 hover:bg-white/20 text-white border border-white/10 active:scale-95"
+            }`}
+            aria-label="Copy UPI ID"
+          >
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5" />
+                <span>Copied</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Pay via UPI deep link with desktop detection */}
+        <button
+          onClick={handleUpiClick}
+          className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-zinc-950 bg-amber-400 hover:bg-amber-300 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+        >
+          <span>Open in UPI App</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </button>
+
+        {notice && (
+          <p className="text-[11px] text-amber-300/90 bg-amber-500/10 border border-amber-500/20 rounded-lg py-1.5 px-2 animate-in fade-in duration-200">
+            {notice}
+          </p>
+        )}
+      </div>
+
+      {/* Footer info */}
+      <div className="w-full pt-4 border-t border-white/5 space-y-2 text-[11px] text-white/40">
+        <p>Supports Google Pay, PhonePe, Paytm & any UPI app</p>
+        <p className="text-white/30 text-[10px]">
+          Unofficial fan tribute. We do not monetize copyrighted audio.
         </p>
       </div>
-      <div className="space-y-2">
-        <h3 className="text-sm font-semibold text-white/90">Takedown Requests</h3>
-        <p>
-          If you are a rights holder and believe any content on this site
-          infringes your copyright, please contact us immediately. We will
-          respond promptly and take appropriate action.
-        </p>
-      </div>
-      <p className="text-white/40 text-xs pt-4 border-t border-white/5">
-        This is a fan-made project. We do not monetize, sell data, or
-        distribute copyrighted material.
-      </p>
     </div>
   );
 }
