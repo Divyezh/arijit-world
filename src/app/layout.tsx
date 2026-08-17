@@ -3,6 +3,8 @@ import "./globals.css";
 import { AudioProvider } from "@/store/useAudioStore";
 import { ThemeProvider } from "@/store/useThemeStore";
 
+import { RadioPlayerProvider } from "@/context/RadioPlayerContext";
+
 export const metadata: Metadata = {
   title: "Arijit Singh — Love, In Every Note | Cinematic Radio",
   description:
@@ -40,8 +42,10 @@ export default function RootLayout({
       <body className="overflow-hidden h-dvh w-screen" suppressHydrationWarning>
         <ThemeProvider>
           <AudioProvider>
-            <div className="film-grain" aria-hidden="true" suppressHydrationWarning />
-            {children}
+            <RadioPlayerProvider>
+              <div className="film-grain" aria-hidden="true" suppressHydrationWarning />
+              {children}
+            </RadioPlayerProvider>
           </AudioProvider>
         </ThemeProvider>
       </body>
