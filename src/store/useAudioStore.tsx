@@ -483,9 +483,27 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+const defaultAudioState: AudioContextType = {
+  currentTrack: allTracks[0] || null,
+  queue: allTracks,
+  queueIndex: 0,
+  isPlaying: false,
+  seek: 0,
+  duration: 262,
+  isLoading: false,
+  toastMessage: null,
+  idleMessage: null,
+  playbackMode: "full",
+  play: () => {},
+  pause: () => {},
+  togglePlay: () => {},
+  next: () => {},
+  prev: () => {},
+  seekTo: () => {},
+  dismissToast: () => {},
+};
+
 export function useAudio() {
   const context = useContext(AudioContext);
-  if (!context)
-    throw new Error("useAudio must be used within AudioProvider");
-  return context;
+  return context || defaultAudioState;
 }

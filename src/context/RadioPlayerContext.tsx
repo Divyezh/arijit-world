@@ -168,8 +168,27 @@ export function RadioPlayerProvider({ children }: { children: React.ReactNode })
   );
 }
 
+const defaultRadioState: RadioPlayerContextType = {
+  currentTrack: null,
+  queue: allTracks,
+  queueIndex: 0,
+  isPlaying: false,
+  queueName: "All Songs",
+  showSpotifyEmbed: false,
+  toastMessage: null,
+  play: () => {},
+  pause: () => {},
+  togglePlay: () => {},
+  next: () => {},
+  prev: () => {},
+  setQueue: () => {},
+  setMoodQueue: () => {},
+  openOnSpotify: () => {},
+  openOnYouTube: () => {},
+  dismissToast: () => {},
+};
+
 export function useRadioPlayer() {
   const context = useContext(RadioPlayerContext);
-  if (!context) throw new Error("useRadioPlayer must be used within RadioPlayerProvider");
-  return context;
+  return context || defaultRadioState;
 }
