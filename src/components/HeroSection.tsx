@@ -10,9 +10,16 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Mobile background artwork */}
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${isPlaying ? "breathing" : ""}`}
+        className={`sm:hidden absolute inset-0 bg-cover bg-center bg-no-repeat ${isPlaying ? "breathing" : ""}`}
+        style={{
+          backgroundImage: "url('/mobile.png')",
+        }}
+      />
+      {/* Desktop background artwork */}
+      <div
+        className={`hidden sm:block absolute inset-0 bg-cover bg-center bg-no-repeat ${isPlaying ? "breathing" : ""}`}
         style={{
           backgroundImage: "url('/images/hero-bg.png')",
         }}

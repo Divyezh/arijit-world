@@ -8,16 +8,31 @@ export default function BackgroundImage() {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
-      {/* Background artwork with responsive focal point */}
-      <Image
-        src={currentTheme.backgroundImage}
-        alt="Arijit Singh Cinematic Background Artwork"
-        fill
-        priority
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
-        className="bg-artwork object-cover max-sm:object-[63%_25%] sm:max-md:object-[58%_32%] md:max-lg:object-[52%_40%] lg:object-center transition-all duration-700 ease-out"
-        quality={92}
-      />
+      {/* Mobile background artwork (portrait) */}
+      <div className="block sm:hidden absolute inset-0">
+        <Image
+          src="/mobile.png"
+          alt="Arijit Singh Mobile Background"
+          fill
+          priority
+          sizes="100vw"
+          className="bg-artwork object-cover object-center transition-all duration-700 ease-out"
+          quality={95}
+        />
+      </div>
+
+      {/* Desktop / Tablet background artwork (landscape) */}
+      <div className="hidden sm:block absolute inset-0">
+        <Image
+          src={currentTheme.backgroundImage}
+          alt="Arijit Singh Cinematic Background Artwork"
+          fill
+          priority
+          sizes="100vw"
+          className="bg-artwork object-cover sm:max-md:object-[58%_32%] md:max-lg:object-[52%_40%] lg:object-center transition-all duration-700 ease-out"
+          quality={92}
+        />
+      </div>
 
       {/* Mobile-only subtle top title banner */}
       <div className="sm:hidden absolute top-14 inset-x-0 flex flex-col items-center justify-center text-center px-4 z-10 opacity-90">
