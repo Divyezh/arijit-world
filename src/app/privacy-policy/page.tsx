@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Arijit Radio",
   description: "Privacy Policy for Arijit Radio — how we handle your data and protect your privacy.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy-policy" },
+        ]}
+      />
+
       <section className="relative py-20 md:py-28">
         <div className="section-container text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gold-gradient mb-4" style={{ fontFamily: "var(--font-display)" }}>PRIVACY POLICY</h1>

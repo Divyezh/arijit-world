@@ -13,6 +13,25 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-dvh overflow-hidden" suppressHydrationWarning>
+      {/* Semantic SEO & Crawler Content */}
+      <div className="sr-only">
+        <h1>Arijit Singh Radio — Love, In Every Note</h1>
+        <p>
+          Welcome to Arijit Radio, a 24/7 cinematic fan tribute radio celebrating the romantic
+          discography of playback singer Arijit Singh. Explore curated mood stations including
+          Love, Heartbreak, Longing, Dreamy, Soulful, and Nostalgic.
+        </p>
+        <nav aria-label="Quick links">
+          <a href="/moods">Mood Stations</a>
+          <a href="/articles">Essays and Discography Stories</a>
+          <a href="/about">About Arijit Radio</a>
+          <a href="/contact">Contact and Feedback</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/disclaimer">Disclaimer</a>
+        </nav>
+      </div>
+
       {/* Layer 0: Full-bleed background image */}
       <BackgroundImage />
 
@@ -36,3 +55,4 @@ export default function Home() {
     </div>
   );
 }
+

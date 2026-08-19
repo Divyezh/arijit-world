@@ -2,28 +2,65 @@ import { notFound } from "next/navigation";
 import { articles, getArticleBySlug } from "@/data/articles";
 import Link from "next/link";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { Metadata } from "next";
+import { ArticleJsonLd } from "@/components/seo/JsonLd";
+import { getSiteUrl } from "@/lib/seo";
 
-export function generateStaticParams() {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateStaticParams() {
   return articles.map((article) => ({
     slug: article.slug,
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const article = getArticleBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
   if (!article) return { title: "Article Not Found" };
+
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/articles/${article.slug}`;
+
   return {
-    title: `${article.title} — Arijit Radio`,
+    title: `${article.title} — ${article.subtitle}`,
     description: article.excerpt,
+    alternates: {
+      canonical: `/articles/${article.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: `${article.title} — Arijit Radio`,
+      description: article.excerpt,
+      url: pageUrl,
+      publishedTime: article.date,
+      authors: ["Divyesh Soni"],
+      tags: [article.mood, "Arijit Singh", "Bollywood Music", "Indian Romance"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${article.title} — Arijit Radio`,
+      description: article.excerpt,
+    },
   };
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = getArticleBySlug(params.slug);
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
   if (!article) notFound();
 
   return (
     <div className="pt-(--nav-height)">
+      <ArticleJsonLd
+        title={article.title}
+        description={article.excerpt}
+        slug={article.slug}
+        datePublished={article.date}
+        heroGradient={article.heroGradient}
+      />
       {/* Hero */}
       <section className={`relative py-20 md:py-32 overflow-hidden bg-linear-to-br ${article.heroGradient}`}>
         <div className="absolute inset-0 bg-black/40" />

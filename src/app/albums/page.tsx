@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Discography & Albums — Arijit Radio",
+  description: "Explore the comprehensive discography and filmography of Arijit Singh.",
+  alternates: {
+    canonical: "/albums",
+  },
+};
 
 export default function AlbumsPage() {
   return (

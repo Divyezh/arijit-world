@@ -1,13 +1,29 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "About — Arijit Radio",
+  title: "About The Project — Arijit Radio",
   description: "Learn about Arijit Radio — an independent, unofficial fan-tribute radio experience dedicated to Arijit Singh's romantic music.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About The Project — Arijit Radio",
+    description: "Learn about Arijit Radio — an independent, unofficial fan-tribute radio experience dedicated to Arijit Singh's romantic music.",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
+
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-b from-amber-900/10 to-transparent" />
         <div className="section-container relative text-center">

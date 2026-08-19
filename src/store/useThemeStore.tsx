@@ -99,7 +99,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 const defaultThemeState: ThemeContextType = {
   currentTheme: themes[0],
-  setTheme: () => {},
+  setTheme: () => { },
 };
 
 export function useTheme() {

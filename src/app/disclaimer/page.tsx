@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Disclaimer — Arijit Radio",
   description: "Legal disclaimer for Arijit Radio — an independent fan tribute. Not affiliated with any artist, label, or streaming platform.",
+  alternates: {
+    canonical: "/disclaimer",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function DisclaimerPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Disclaimer", path: "/disclaimer" },
+        ]}
+      />
+
       <section className="relative py-20 md:py-28">
         <div className="section-container text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gold-gradient mb-4" style={{ fontFamily: "var(--font-display)" }}>DISCLAIMER</h1>

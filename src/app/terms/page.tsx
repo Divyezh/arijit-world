@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Terms of Service — Arijit Radio",
   description: "Terms of Service for Arijit Radio — the rules and guidelines for using this fan-tribute radio experience.",
+  alternates: {
+    canonical: "/terms",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Terms of Service", path: "/terms" },
+        ]}
+      />
+
       <section className="relative py-20 md:py-28">
         <div className="section-container text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gold-gradient mb-4" style={{ fontFamily: "var(--font-display)" }}>TERMS OF SERVICE</h1>

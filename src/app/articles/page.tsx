@@ -2,16 +2,33 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { articles } from "@/data/articles";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Articles — Arijit Radio",
+  title: "Essays & Discography Stories — Arijit Radio",
   description:
-    "Original essays exploring the cultural impact, emotional architecture, and artistic legacy of Arijit Singh's romantic era in Bollywood.",
+    "Deep-dive essays exploring the cultural impact, vocal architecture, and emotional legacy of Arijit Singh's romantic era in Bollywood music.",
+  alternates: {
+    canonical: "/articles",
+  },
+  openGraph: {
+    title: "Essays & Discography Stories — Arijit Radio",
+    description:
+      "Deep-dive essays exploring the cultural impact, vocal architecture, and emotional legacy of Arijit Singh's romantic era in Bollywood music.",
+    type: "website",
+  },
 };
 
 export default function ArticlesPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Articles", path: "/articles" },
+        ]}
+      />
+
       {/* Hero */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-b from-rose-900/10 to-transparent" />

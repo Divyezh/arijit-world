@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
 import MoodSelector from "@/components/MoodSelector";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Mood Stations — Arijit Radio",
+  title: "Mood Stations — Curated Romantic Playlists | Arijit Radio",
   description:
     "Tune your heart to one of six curated mood stations: Love, Heartbreak, Longing, Dreamy, Soulful, or Nostalgic. Each station plays a curated queue of Arijit Singh's finest romantic songs.",
+  alternates: {
+    canonical: "/moods",
+  },
+  openGraph: {
+    title: "Mood Stations — Curated Romantic Playlists | Arijit Radio",
+    description:
+      "Tune your heart to one of six curated mood stations: Love, Heartbreak, Longing, Dreamy, Soulful, or Nostalgic.",
+    type: "website",
+  },
 };
 
 export default function MoodsPage() {
   return (
     <div className="pt-(--nav-height)">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Mood Stations", path: "/moods" },
+        ]}
+      />
+
       {/* Hero */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-b from-amber-900/10 to-transparent" />
