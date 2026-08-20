@@ -28,4 +28,11 @@ export const albums: Album[] = [
   { id: "brahmastra", movie: "Brahmāstra", year: 2022, posterColor: "#e74c3c", trackCount: 1 },
   { id: "bhediya", movie: "Bhediya", year: 2022, posterColor: "#1a5276", trackCount: 1 },
   { id: "dunki", movie: "Dunki", year: 2023, posterColor: "#f4d03f", trackCount: 1 },
+  { id: "marjaavaan", movie: "Marjaavaan", year: 2019, posterColor: "#9c27b0", trackCount: 1 },
+  { id: "commando3", movie: "Commando 3", year: 2019, posterColor: "#d35400", trackCount: 1 },
+  { id: "raanjhana", movie: "Raanjhana", year: 2019, posterColor: "#c0392b", trackCount: 1 },
+  { id: "rrkpk", movie: "Rocky Aur Rani Kii Prem Kahaani", year: 2023, posterColor: "#e91e63", trackCount: 1 },
+  { id: "tumbin2", movie: "Tum Bin 2", year: 2016, posterColor: "#2980b9", trackCount: 1 },
+  { id: "genius", movie: "Genius", year: 2018, posterColor: "#f39c12", trackCount: 1 },
+  { id: "rustom", movie: "Rustom", year: 2016, posterColor: "#27ae60", trackCount: 1 },
 ];
