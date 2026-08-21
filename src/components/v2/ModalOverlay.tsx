@@ -97,27 +97,27 @@ function SupportContent() {
   };
 
   return (
-    <div className="flex flex-col items-center text-center space-y-6 pb-2">
+    <div className="flex flex-col items-center text-center space-y-6 pb-6">
       {/* Intro message */}
-      <div className="space-y-1.5 max-w-xs">
-        <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">
+      <div className="space-y-2 max-w-sm px-2">
+        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400/90 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
           Fan Tribute & Streaming Fund
-        </p>
+        </span>
         <h3
-          className="text-lg font-bold text-white tracking-tight"
+          className="text-xl font-bold text-white tracking-tight pt-1"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           Keep the Radio Playing
         </h3>
-        <p className="text-xs text-white/60 leading-relaxed">
-          Your support helps cover hosting and streaming bandwidth for all listeners.
+        <p className="text-xs text-white/60 leading-relaxed max-w-xs mx-auto">
+          Your support directly covers streaming bandwidth & high-performance server hosting for all listeners.
         </p>
       </div>
 
       {/* QR Code Presentation */}
-      <div className="relative group">
-        <div className="absolute -inset-2 bg-linear-to-b from-amber-500/20 to-transparent rounded-3xl blur-xl opacity-60 pointer-events-none" />
-        <div className="relative bg-white p-3.5 rounded-2xl shadow-2xl shadow-black/50 border border-white/20">
+      <div className="relative group my-1">
+        <div className="absolute -inset-3 bg-linear-to-b from-amber-500/25 via-amber-500/10 to-transparent rounded-3xl blur-xl opacity-70 pointer-events-none" />
+        <div className="relative bg-white p-4 rounded-2xl shadow-2xl shadow-black/70 border border-white/30 transition-transform duration-300 group-hover:scale-[1.01]">
           <Image
             src="/images/support-qr.png"
             alt="Divyesh Soni UPI QR Code"
@@ -129,61 +129,63 @@ function SupportContent() {
         </div>
       </div>
 
-      {/* UPI Actions */}
-      <div className="w-full max-w-xs space-y-3">
+      {/* UPI Actions Container */}
+      <div className="w-full max-w-sm space-y-3.5 pt-2">
         {/* Copy UPI ID Pill */}
-        <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-left hover:border-white/20 transition-colors">
+        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/[0.06] border border-white/10 text-left hover:border-white/20 transition-all shadow-inner">
           <div className="min-w-0 flex-1">
-            <span className="block text-[10px] uppercase font-semibold tracking-wider text-white/40">
-              UPI ID
+            <span className="block text-[10px] uppercase font-bold tracking-wider text-white/40 mb-0.5">
+              Direct UPI ID
             </span>
-            <span className="block text-xs font-mono text-amber-300 truncate select-all">
+            <span className="block text-xs sm:text-sm font-mono font-medium text-amber-300 truncate select-all">
               {upiId}
             </span>
           </div>
           <button
             onClick={copyToClipboard}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${
               copied
-                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                : "bg-white/10 hover:bg-white/20 text-white border border-white/10 active:scale-95"
+                ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/20"
+                : "bg-white/10 hover:bg-white/20 text-white border border-white/15 active:scale-95 hover:border-white/30"
             }`}
             aria-label="Copy UPI ID"
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5" />
-                <span>Copied</span>
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span>Copied!</span>
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5" />
+                <Copy className="w-4 h-4 text-white/80" />
                 <span>Copy</span>
               </>
             )}
           </button>
         </div>
 
-        {/* Pay via UPI deep link with desktop detection */}
+        {/* Large Prominent UPI App Button */}
         <button
           onClick={handleUpiClick}
-          className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-zinc-950 bg-amber-400 hover:bg-amber-300 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+          className="group relative flex items-center justify-center gap-2.5 w-full py-3.5 px-6 rounded-2xl text-sm font-bold text-zinc-950 bg-linear-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-300 active:scale-[0.98] transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 border border-amber-300/40 cursor-pointer"
         >
-          <span>Open in UPI App</span>
-          <ExternalLink className="w-3.5 h-3.5" />
+          <span className="tracking-wide">Open in UPI App</span>
+          <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </button>
 
         {notice && (
-          <p className="text-[11px] text-amber-300/90 bg-amber-500/10 border border-amber-500/20 rounded-lg py-1.5 px-2 animate-in fade-in duration-200">
+          <p className="text-xs text-amber-300 bg-amber-500/15 border border-amber-500/30 rounded-xl py-2 px-3 animate-in fade-in duration-200 text-center font-medium">
             {notice}
           </p>
         )}
       </div>
 
-      {/* Footer info */}
-      <div className="w-full pt-4 border-t border-white/5 space-y-2 text-[11px] text-white/40">
-        <p>Supports Google Pay, PhonePe, Paytm & any UPI app</p>
-        <p className="text-white/30 text-[10px]">
+      {/* Footer Info */}
+      <div className="w-full max-w-sm pt-5 border-t border-white/10 space-y-2 text-xs text-white/50">
+        <p className="font-medium text-white/70">
+          Supports Google Pay, PhonePe, Paytm & any UPI app
+        </p>
+        <p className="text-white/35 text-[11px] leading-relaxed">
           Unofficial fan tribute. We do not monetize copyrighted audio.
         </p>
       </div>
