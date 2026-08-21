@@ -7,11 +7,12 @@ export interface Album {
 }
 
 export const albums: Album[] = [
-  { id: "aashiqui2", movie: "Aashiqui 2", year: 2013, posterColor: "#8b1a1a", trackCount: 1 },
+  { id: "aashiqui2", movie: "Aashiqui 2", year: 2013, posterColor: "#8b1a1a", trackCount: 2 },
   { id: "yjhd", movie: "Yeh Jawaani Hai Deewani", year: 2013, posterColor: "#1a5276", trackCount: 1 },
   { id: "2states", movie: "2 States", year: 2014, posterColor: "#b7950b", trackCount: 1 },
   { id: "hskd", movie: "Humpty Sharma Ki Dulhania", year: 2014, posterColor: "#e74c3c", trackCount: 1 },
   { id: "citylights", movie: "CityLights", year: 2014, posterColor: "#2c3e50", trackCount: 1 },
+  { id: "ekvillain", movie: "Ek Villain", year: 2014, posterColor: "#1a5276", trackCount: 1 },
   { id: "hak", movie: "Hamari Adhuri Kahani", year: 2015, posterColor: "#6c3483", trackCount: 1 },
   { id: "tamasha", movie: "Tamasha", year: 2015, posterColor: "#c0392b", trackCount: 1 },
   { id: "dilwale", movie: "Dilwale", year: 2015, posterColor: "#2980b9", trackCount: 1 },
@@ -24,6 +25,7 @@ export const albums: Album[] = [
   { id: "kesari", movie: "Kesari", year: 2019, posterColor: "#d68910", trackCount: 1 },
   { id: "kalank", movie: "Kalank", year: 2019, posterColor: "#7d3c98", trackCount: 1 },
   { id: "war", movie: "War", year: 2019, posterColor: "#cb4335", trackCount: 1 },
+  { id: "chhichhore", movie: "Chhichhore", year: 2019, posterColor: "#e67e22", trackCount: 1 },
   { id: "loveaajkal", movie: "Love Aaj Kal", year: 2020, posterColor: "#ec7063", trackCount: 1 },
   { id: "brahmastra", movie: "Brahmāstra", year: 2022, posterColor: "#e74c3c", trackCount: 1 },
   { id: "bhediya", movie: "Bhediya", year: 2022, posterColor: "#1a5276", trackCount: 1 },
@@ -35,4 +37,9 @@ export const albums: Album[] = [
   { id: "tumbin2", movie: "Tum Bin 2", year: 2016, posterColor: "#2980b9", trackCount: 1 },
   { id: "genius", movie: "Genius", year: 2018, posterColor: "#f39c12", trackCount: 1 },
   { id: "rustom", movie: "Rustom", year: 2016, posterColor: "#27ae60", trackCount: 1 },
+  { id: "zhzb", movie: "Zara Hatke Zara Bachke", year: 2023, posterColor: "#e67e22", trackCount: 1 },
+  { id: "tjmm", movie: "Tu Jhoothi Main Makkaar", year: 2023, posterColor: "#ec407a", trackCount: 2 },
+  { id: "laapataaladies", movie: "Laapataa Ladies", year: 2024, posterColor: "#26a69a", trackCount: 1 },
+  { id: "saiyaara", movie: "Saiyaara", year: 2025, posterColor: "#ab47bc", trackCount: 1 },
+  { id: "raabta2017", movie: "Raabta", year: 2017, posterColor: "#2e4053", trackCount: 1 },
 ];

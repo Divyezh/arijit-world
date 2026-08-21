@@ -33,20 +33,20 @@ export default function TopBar({ onOpenModal }: TopBarProps) {
         </div>
       </div>
 
-      {/* Middle — Support Me Button */}
+      {/* Middle — Buy Me a Chai Button */}
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center z-10">
         <button
           onClick={() => onOpenModal("support")}
           className="group relative flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 backdrop-blur-md cursor-pointer border border-amber-400/30 bg-linear-to-r from-amber-500/15 via-rose-500/15 to-amber-500/15 text-amber-200 hover:text-white hover:border-amber-400/60 hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:scale-105 active:scale-95"
           id="nav-support-me-btn"
-          title="Support the Creator"
+          title="Buy Me a Chai"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
           <Heart className="w-3.5 h-3.5 text-rose-400 group-hover:scale-110 transition-transform fill-rose-400/20" />
-          <span className="tracking-wide font-medium">Support Me</span>
+          <span className="tracking-wide font-medium">Buy Me a Chai</span>
         </button>
       </div>
 
@@ -97,7 +97,7 @@ export default function TopBar({ onOpenModal }: TopBarProps) {
               className="w-full px-4 py-3 text-left text-sm font-medium text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 transition-colors flex items-center gap-2 border-b border-white/5 cursor-pointer"
             >
               <Heart className="w-4 h-4 text-rose-400 fill-rose-400/20" />
-              Support Me (QR Code)
+              Buy Me a Chai (QR Code)
             </button>
             {navItems.map((item) => (
               <button

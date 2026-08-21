@@ -21,7 +21,7 @@ interface ModalOverlayProps {
 const modalTitles: Record<string, string> = {
   about: "About This Project",
   faq: "Frequently Asked Questions",
-  support: "Support Creator",
+  support: "Buy Me a Chai ☕",
 };
 
 function AboutContent() {

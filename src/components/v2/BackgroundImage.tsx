@@ -34,21 +34,6 @@ export default function BackgroundImage() {
         />
       </div>
 
-      {/* Mobile-only subtle top title banner */}
-      <div className="sm:hidden absolute top-14 inset-x-0 flex flex-col items-center justify-center text-center px-4 z-10 opacity-90">
-        <span
-          className="text-2xl font-bold tracking-tight text-white/90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          ARIJIT SINGH
-        </span>
-        <span
-          className="text-[10px] tracking-[0.25em] uppercase font-semibold text-amber-300/80 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          LOVE, IN EVERY NOTE
-        </span>
-      </div>
 
       {/* Subtle vignette — soft border darkening */}
       <div
