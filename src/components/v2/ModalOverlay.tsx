@@ -132,7 +132,7 @@ function SupportContent() {
       {/* UPI Actions Container */}
       <div className="w-full max-w-sm space-y-3.5 pt-2">
         {/* Copy UPI ID Pill */}
-        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/[0.06] border border-white/10 text-left hover:border-white/20 transition-all shadow-inner">
+        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/6 border border-white/10 text-left hover:border-white/20 transition-all shadow-inner">
           <div className="min-w-0 flex-1">
             <span className="block text-[10px] uppercase font-bold tracking-wider text-white/40 mb-0.5">
               Direct UPI ID

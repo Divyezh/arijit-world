@@ -83,6 +83,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const currentEngineRef = useRef<"youtube" | "howler">("youtube");
   const activeYtVideoIdRef = useRef<string | null>(null);
   const triedAltForTrackRef = useRef<string | null>(null);
+  const consecutiveErrorsRef = useRef<number>(0);
 
   // Sync refs to avoid stale closures in callbacks and event listeners
   const currentTrackRef = useRef<Track | null>(allTracks[0] || null);
@@ -163,7 +164,10 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   /* ── Clean Fallback to Howler ── */
   const fallbackToHowler = useCallback(() => {
     const track = currentTrackRef.current;
-    if (!track || !track.audio_src) return;
+    if (!track || !track.audio_src) {
+      setState((prev) => ({ ...prev, isLoading: false }));
+      return;
+    }
 
     cleanHowl();
     stopSeekUpdater();
@@ -176,6 +180,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         html5: true,
         preload: true,
         onplay: () => {
+          consecutiveErrorsRef.current = 0;
           setState((prev) => ({
             ...prev,
             isPlaying: true,
@@ -192,12 +197,25 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
             loadAndPlayTrack(nextTrack, queueRef.current, nextIndex);
           }
         },
-        onloaderror: () => {
+        onloaderror: (_id, err) => {
+          console.warn("Audio stream load error:", err);
+          consecutiveErrorsRef.current += 1;
+          if (consecutiveErrorsRef.current >= 3) {
+            stopSeekUpdater();
+            setState((prev) => ({
+              ...prev,
+              isPlaying: false,
+              isLoading: false,
+              toastMessage: "Playback paused. Tap play to retry.",
+            }));
+            return;
+          }
+
           showToast("Skipped track — playing next");
           const nextIndex = (queueIndexRef.current + 1) % queueRef.current.length;
           const nextTrack = queueRef.current[nextIndex];
           if (nextTrack) {
-            setTimeout(() => loadAndPlayTrack(nextTrack, queueRef.current, nextIndex), 100);
+            setTimeout(() => loadAndPlayTrack(nextTrack, queueRef.current, nextIndex), 300);
           }
         },
         onplayerror: () => {
@@ -212,6 +230,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       setState((s) => ({ ...s, playbackMode: "preview" }));
     } catch (err) {
       console.warn("Howler fallback error:", err);
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   }, [cleanHowl, showToast, startSeekUpdater, stopSeekUpdater]);
 
@@ -297,6 +316,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
             onStateChange: (event: any) => {
               // 1 = PLAYING, 2 = PAUSED, 0 = ENDED, 3 = BUFFERING
               if (event.data === 1) {
+                consecutiveErrorsRef.current = 0;
                 setState((s) => ({
                   ...s,
                   isPlaying: true,
@@ -326,13 +346,14 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
               if (
                 track &&
                 track.alt_youtube_video_id &&
+                track.alt_youtube_video_id !== track.youtube_video_id &&
                 triedAltForTrackRef.current !== track.id
               ) {
                 triedAltForTrackRef.current = track.id;
                 loadAndPlayTrack(track, queueRef.current, queueIndexRef.current, true);
                 return;
               }
-              // Otherwise fall back smoothly
+              // Otherwise fall back smoothly to verified high quality stream
               fallbackToHowler();
             },
           },
