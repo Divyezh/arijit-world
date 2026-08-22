@@ -8,6 +8,10 @@ import {
   Check,
   Copy,
   ExternalLink,
+  Sparkles,
+  QrCode,
+  Heart,
+  Coffee,
 } from "lucide-react";
 import { faqs } from "@/data/faqs";
 
@@ -21,7 +25,7 @@ interface ModalOverlayProps {
 const modalTitles: Record<string, string> = {
   about: "About This Project",
   faq: "Frequently Asked Questions",
-  support: "Buy Me a Chai ☕",
+  support: "Buy Me a Chai",
 };
 
 function AboutContent() {
@@ -97,44 +101,60 @@ function SupportContent() {
   };
 
   return (
-    <div className="flex flex-col items-center text-center space-y-6 pb-6">
-      {/* Intro message */}
-      <div className="space-y-2 max-w-sm px-2">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400/90 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-          Fan Tribute & Streaming Fund
-        </span>
+    <div className="flex flex-col items-center text-center space-y-6 px-1 pb-4">
+      {/* 1. Header & Badge Section */}
+      <div className="space-y-2.5 max-w-sm px-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 shadow-sm shadow-amber-500/10">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">
+            Fan Tribute & Streaming Fund
+          </span>
+        </div>
+
         <h3
-          className="text-xl font-bold text-white tracking-tight pt-1"
+          className="text-2xl sm:text-[26px] font-bold text-white tracking-tight leading-snug"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          Keep the Radio Playing
+          Keep the Radio Playing ☕
         </h3>
-        <p className="text-xs text-white/60 leading-relaxed max-w-xs mx-auto">
-          Your support directly covers streaming bandwidth & high-performance server hosting for all listeners.
+
+        <p className="text-xs text-white/60 leading-relaxed max-w-72.5 mx-auto">
+          Your voluntary support directly covers streaming bandwidth & high-performance server hosting for all listeners.
         </p>
       </div>
 
-      {/* QR Code Presentation */}
-      <div className="relative group my-1">
-        <div className="absolute -inset-3 bg-linear-to-b from-amber-500/25 via-amber-500/10 to-transparent rounded-3xl blur-xl opacity-70 pointer-events-none" />
-        <div className="relative bg-white p-4 rounded-2xl shadow-2xl shadow-black/70 border border-white/30 transition-transform duration-300 group-hover:scale-[1.01]">
-          <Image
-            src="/images/support-qr.png"
-            alt="Divyesh Soni UPI QR Code"
-            width={240}
-            height={300}
-            className="w-56 sm:w-60 h-auto rounded-xl object-contain block select-none"
-            priority
-          />
+      {/* 2. QR Code Dedicated Glass Card */}
+      <div className="relative group w-full max-w-70">
+        {/* Ambient Gold Halo Glow */}
+        <div className="absolute -inset-2.5 bg-linear-to-b from-amber-500/20 via-amber-500/8 to-transparent rounded-3xl blur-xl opacity-80 pointer-events-none transition-opacity duration-300 group-hover:opacity-100" />
+
+        <div className="relative p-4 rounded-3xl bg-white/4 border border-white/12 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-3">
+          {/* Inner White Stage */}
+          <div className="relative bg-white p-3 rounded-2xl shadow-md border border-white/40 overflow-hidden flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]">
+            <Image
+              src="/images/support-qr.png"
+              alt="Divyesh Soni UPI QR Code"
+              width={200}
+              height={200}
+              className="w-44 sm:w-48 h-auto rounded-xl object-contain block select-none"
+              priority
+            />
+          </div>
+
+          {/* Micro Scan Hint */}
+          <div className="flex items-center gap-1.5 text-[11px] font-medium text-white/50">
+            <QrCode className="w-3.5 h-3.5 text-amber-400/80" />
+            <span>Scan with any UPI App</span>
+          </div>
         </div>
       </div>
 
-      {/* UPI Actions Container */}
-      <div className="w-full max-w-sm space-y-3.5 pt-2">
-        {/* Copy UPI ID Pill */}
-        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/6 border border-white/10 text-left hover:border-white/20 transition-all shadow-inner">
+      {/* 3. UPI ID & Interactive Actions */}
+      <div className="w-full max-w-80 space-y-3">
+        {/* Copyable UPI ID Box */}
+        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-left hover:border-amber-400/30 transition-all duration-200 shadow-inner">
           <div className="min-w-0 flex-1">
-            <span className="block text-[10px] uppercase font-bold tracking-wider text-white/40 mb-0.5">
+            <span className="block text-[9px] uppercase font-bold tracking-wider text-white/40 mb-0.5">
               Direct UPI ID
             </span>
             <span className="block text-xs sm:text-sm font-mono font-medium text-amber-300 truncate select-all">
@@ -143,49 +163,56 @@ function SupportContent() {
           </div>
           <button
             onClick={copyToClipboard}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${copied
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 active:scale-95 ${
+              copied
                 ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/20"
-                : "bg-white/10 hover:bg-white/20 text-white border border-white/15 active:scale-95 hover:border-white/30"
-              }`}
+                : "bg-white/10 hover:bg-white/20 text-white border border-white/15 hover:border-white/30"
+            }`}
             aria-label="Copy UPI ID"
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-400" />
-                <span>Copied!</span>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4 text-white/80" />
+                <Copy className="w-3.5 h-3.5 text-white/80" />
                 <span>Copy</span>
               </>
             )}
           </button>
         </div>
 
-        {/* Large Prominent UPI App Button */}
+        {/* Primary Warm Gold CTA */}
         <button
           onClick={handleUpiClick}
-          className="group relative flex items-center justify-center gap-2.5 w-full py-3.5 px-6 rounded-2xl text-sm font-bold text-zinc-950 bg-linear-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-300 active:scale-[0.98] transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 border border-amber-300/40 cursor-pointer"
+          className="group relative flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-2xl text-sm font-bold text-zinc-950 bg-linear-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 active:scale-[0.98] transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 border border-amber-300/40 cursor-pointer"
         >
+          <Sparkles className="w-4 h-4 text-zinc-900 transition-transform group-hover:rotate-12" />
           <span className="tracking-wide">Open in UPI App</span>
-          <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ExternalLink className="w-3.5 h-3.5 text-zinc-800 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </button>
 
+        {/* Notice Message Toast */}
         {notice && (
-          <p className="text-xs text-amber-300 bg-amber-500/15 border border-amber-500/30 rounded-xl py-2 px-3 animate-in fade-in duration-200 text-center font-medium">
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xs text-amber-300 bg-amber-500/15 border border-amber-500/30 rounded-xl py-2 px-3 text-center font-medium"
+          >
             {notice}
-          </p>
+          </motion.p>
         )}
       </div>
 
-      {/* Footer Info */}
-      <div className="w-full max-w-sm pt-5 border-t border-white/10 space-y-2 text-xs text-white/50">
-        <p className="font-medium text-white/70">
-          Supports Google Pay, PhonePe, Paytm & any UPI app
+      {/* 4. Supported Apps & Micro Footer */}
+      <div className="w-full max-w-80 pt-4 border-t border-white/8 space-y-2">
+        <p className="text-[11px] font-medium text-white/60">
+          Supports Google Pay • PhonePe • Paytm • BHIM
         </p>
-        <p className="text-white/35 text-[11px] leading-relaxed">
-          Unofficial fan tribute. We do not monetize copyrighted audio.
+        <p className="text-white/35 text-[10px] leading-relaxed">
+          100% voluntary fan tribute fund. We do not monetize copyrighted audio.
         </p>
       </div>
     </div>
@@ -202,47 +229,66 @@ export default function ModalOverlay({ activeModal, onClose }: ModalOverlayProps
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-md"
             onClick={onClose}
             aria-hidden="true"
           />
 
-          {/* Panel — slides from right */}
+          {/* Panel — slides smoothly from right */}
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-105 max-w-full"
+            initial={{ x: "100%", opacity: 0.5 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+            transition={{ type: "spring", damping: 32, stiffness: 320 }}
+            className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-110 max-w-full shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-label={modalTitles[activeModal]}
             id={`modal-${activeModal}`}
           >
-            <div className="h-full flex flex-col glass-light border-l border-white/5"
-              style={{ background: "rgba(10, 10, 10, 0.92)", backdropFilter: "blur(40px)" }}
+            <div
+              className="h-full flex flex-col border-l border-white/10 relative overflow-hidden"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 0%, rgba(212, 168, 83, 0.12) 0%, rgba(14, 12, 10, 0.95) 45%, rgba(8, 8, 8, 0.98) 100%)",
+                backdropFilter: "blur(40px)",
+                WebkitBackdropFilter: "blur(40px)",
+              }}
             >
+              {/* Top ambient highlight line */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-amber-400/40 to-transparent" />
+
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
-                <h2
-                  className="text-lg font-semibold text-white"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {modalTitles[activeModal]}
-                </h2>
+              <div className="flex items-center justify-between px-6 py-4.5 border-b border-white/8 shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400">
+                    {activeModal === "support" ? (
+                      <Coffee className="w-4 h-4" />
+                    ) : (
+                      <Heart className="w-4 h-4" />
+                    )}
+                  </div>
+                  <h2
+                    className="text-base sm:text-lg font-semibold text-white tracking-tight"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {modalTitles[activeModal]}
+                  </h2>
+                </div>
+
                 <button
                   onClick={onClose}
-                  className="p-2 -mr-2 text-white/40 hover:text-white transition-colors cursor-pointer"
-                  aria-label="Close"
+                  className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 active:scale-95 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all cursor-pointer"
+                  aria-label="Close modal"
                   id="modal-close"
                 >
-                  <X size={20} />
+                  <X size={16} />
                 </button>
               </div>
 
-              {/* Content */}
-              <div className="flex-1 overflow-y-auto modal-scroll px-6 py-6">
+              {/* Content area */}
+              <div className="flex-1 overflow-y-auto modal-scroll px-5 sm:px-7 py-6">
                 {activeModal === "about" && <AboutContent />}
                 {activeModal === "faq" && <FAQContent />}
                 {activeModal === "support" && <SupportContent />}
