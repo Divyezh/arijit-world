@@ -143,11 +143,10 @@ function SupportContent() {
           </div>
           <button
             onClick={copyToClipboard}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${
-              copied
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${copied
                 ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/20"
                 : "bg-white/10 hover:bg-white/20 text-white border border-white/15 active:scale-95 hover:border-white/30"
-            }`}
+              }`}
             aria-label="Copy UPI ID"
           >
             {copied ? (
